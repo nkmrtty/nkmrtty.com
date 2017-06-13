@@ -1,0 +1,7 @@
+degree: String
+institute: String
+type: String
+title: String
+supervisor: String
+fromdate: DateTime
+todate: DateTime

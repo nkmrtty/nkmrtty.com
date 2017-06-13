@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <header class="header">
+        <div class="top-bar container-fluid">
+            <div class="actions">
+                <a class="btn" href="assets/materials/resume.pdf"><i class="fa fa-download" aria-hidden="true"></i> Download My Resume</a>
+            </div><!--//actions-->
+            <ul class="social list-inline">
+                <li><a href="https://www.linkedin.com/in/tatsuya-nakamura-556160ba/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                <li><a href="https://twitter.com/nkmrtty"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="https://github.com/nkmrtty"><i class="fa fa-github-alt" aria-hidden="true"></i></a></li>
+            </ul><!--//social-->
+        </div><!--//top-bar-->
+        
+        <div class="intro">
+            <div class="container text-center">
+                <img class="profile-image" src="assets/images/profile-image-round.png" alt="">
+                <h1 class="name">Tatsuya NAKAMURA</h1>
+                <div class="title">Ph.D. candidate at Osaka University</div>
+            </div><!--//container-->
+        </div><!--//intro-->
+        
+        <div class="contact-info">
+            <div class="container text-center">
+                <ul class="list-inline">
+                    <li class="email"><i class="fa fa-envelope"></i><a href="mailto:nakamura.tatsuya@ist.osaka-u.ac.jp">nakamura.tatsuya@ist.osaka-u.ac.jp</a></li>
+                    <li class="website"><i class="fa fa-globe"></i><a href="//nkmrtty.com" target="_blank">nkmrtty.com</a></li>
+                </ul>
+            </div><!--//container-->
+        </div><!--//contact-info-->
+        
+        <div class="page-nav-space-holder hidden-xs">
+            <div id="page-nav-wrapper" class="page-nav-wrapper text-center">
+                <div class="container">
+                    <ul id="page-nav" class="nav page-nav list-inline">
+                        <li><a class="scrollto" href="#education-section">Education</a></li>
+                        <li><a class="scrollto" href="#experiences-section">Experiences</a></li>
+                        <li><a class="scrollto" href="#publication-section">Publication</a></li>
+                    </ul><!--//page-nav-->
+                </div>
+            </div><!--//page-nav-wrapper-->
+        </div>
+    </header><!--//header-->
+
+    <div class="wrapper container">        
+         <section id="education-section" class="education-section section">
+             <h2 class="section-title">Education</h2>
+             <div class="row">
+             {% for education in educations %}
+                <div class="item col-sm-12">
+                    <div class="item-inner">
+                        <h3 class="degree">{{ education.degree }}</h3>
+                        <div class="education-body">
+                            {{ education.institute }}
+                        </div><!--//education-body-->
+                        <div class="time">{{ education.fromdate.strftime('%Y') }} - {% if education.todate %} {{ education.todate.strftime('%Y') }} {% else %} Present {% endif %}</div>
+                        <div class="desc">
+                            {% if education.title %}
+                                {{ education.type }} : {{ education.title }} <br />
+                            {% endif %}
+                            Supervisor: {{ education.supervisor | safe }}
+                        </div>
+                    </div><!--//item-inner-->
+                </div><!--//item-->
+             {% endfor %}
+             </div><!--//row-->
+        </section><!--//section-->
+
+        <section id="experiences-section" class="experiences-section section">
+            <h2 class="section-title">Experiences</h2>
+            <div class="timeline">
+                {% for experience in experiences %}
+                    <div class="item">
+                        <div class="work-place">
+                            <h3 class="place">{{ experience.place }}</h3>
+                        </div>
+                        <div class="job-meta">
+                            <div class="title">{{ experience.title }}</div>
+                            <div class="time">{{ experience.fromdate.strftime('%Y/%m') }} - {% if experience.todate %} {{ experience.todate.strftime('%Y/%m') }} {% else %} Present {% endif %}</div>
+                        </div><!--//job-meta-->
+                        <div class="job-desc">
+                            <p>{{ experience.desc }}</p> 
+                        </div><!--//job-desc-->
+                    </div><!--//item-->
+                {% endfor %}
+            </div><!--//timeline-->
+        </section><!--//section-->   
+
+        <section id="publication-section" class="publication-section section">
+            <h2 class="section-title">Publication</h2>
+
+            <h3 class="subtitle text-center">Journal</h3>
+            <div class="row">
+                {% for bib in journals %}
+                    <div class="item col-sm-12">
+                        <div class="item-inner">
+                            <div class="author">{{ bib.author }}</div>
+                            <h3 class="title">{{ bib.title }}</h3>
+                            <div class="publication-info">
+                                {{ bib.booktitle }}
+                                {% if bib.volume %}, Vol. {{ bib.volume }} {% endif %}
+                                {% if bib.number %}, No. {{ bib.number }} {% endif %}
+                                {% if bib.pages %}, pp. {{ bib.pages }} {% endif %}
+                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }} {% else %}, to appear {% endif %}.
+                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                            </div><!--//publication-body-->
+                        </div><!--//item-inner-->
+                    </div><!--//item-->
+                {% endfor %}
+            </div><!--//row-->
+
+            <h3 class="subtitle text-center">International Conference</h3>
+            <div class="row">
+                {% for bib in intlconf %}
+                    <div class="item col-sm-12">
+                        <div class="item-inner">
+                            <div class="author">{{ bib.author }}</div>
+                            <h3 class="title">{{ bib.title }}</h3>
+                            <div class="publication-info">
+                                {{ bib.booktitle }}
+                                {% if bib.volume %}, Vol. {{ bib.volume }}{% endif %}
+                                {% if bib.number %}, No. {{ bib.number }}{% endif %}
+                                {% if bib.pages %}, pp. {{ bib.pages }}{% endif %}
+                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }} {% else %}, to appear {% endif %}.
+                                {% if bib.venue %} {{ bib.venue }} .{% endif %}
+                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                            </div><!--//publication-body-->
+                        </div><!--//item-inner-->
+                    </div><!--//item-->
+                {% endfor %}
+            </div><!--//row-->
+
+            <h3 class="subtitle text-center">Domestic Conference</h3>
+            <div class="row">
+                {% for bib in domconf %}
+                    <div class="item col-sm-12">
+                        <div class="item-inner">
+                            <div class="author">{{ bib.author }}</div>
+                            <h3 class="title">{{ bib.title }}</h3>
+                            <div class="publication-info">
+                                {{ bib.booktitle }}
+                                {% if bib.volume %}, Vol. {{ bib.volume }}{% endif %}
+                                {% if bib.number %}, No. {{ bib.number }}{% endif %}
+                                {% if bib.pages %}, pp. {{ bib.pages }}{% endif %}
+                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }} {% else %}, to appear {% endif %}.
+                                {% if bib.venue %} {{ bib.venue }} .{% endif %}
+                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                            </div><!--//publication-body-->
+                        </div><!--//item-inner-->
+                    </div><!--//item-->
+                {% endfor %}
+            </div><!--//row-->
+
+            <h3 class="subtitle text-center">Research Fund</h3>
+            <div class="row">
+                {% for bib in funds %}
+                    <div class="item col-sm-12">
+                        <div class="item-inner">
+                            <div class="author">{{ bib.author }}</div>
+                            <h3 class="title">{{ bib.title }}</h3>
+                            <div class="publication-info">
+                                {{ bib.booktitle }} .
+                            </div><!--//publication-body-->
+                        </div><!--//item-inner-->
+                    </div><!--//item-->
+                {% endfor %}
+            </div><!--//row-->
+
+            <h3 class="subtitle text-center">Award</h3>
+            <div class="row">
+                {% for bib in awards %}
+                    <div class="item col-sm-12">
+                        <div class="item-inner">
+                            <div class="author">{{ bib.author }}</div>
+                            <h3 class="title">{{ bib.title }}</h3>
+                            <div class="publication-info">
+                                {{ bib.booktitle }}
+                                {% if bib.volume %}, Vol. {{ bib.volume }}{% endif %}
+                                {% if bib.number %}, No. {{ bib.number }}{% endif %}
+                                {% if bib.pages %}, pp. {{ bib.pages }}{% endif %}
+                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }} {% else %}, to appear {% endif %}.
+                                {% if bib.venue %} {{ bib.venue }} .{% endif %}
+                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                            </div><!--//publication-body-->
+                        </div><!--//item-inner-->
+                    </div><!--//item-->
+                {% endfor %}
+            </div><!--//row-->
+
+            <h3 class="subtitle text-center">Others</h3>
+            <div class="row">
+                {% for bib in others %}
+                    <div class="item col-sm-12">
+                        <div class="item-inner">
+                            {% if bib.author %}<div class="author">{{ bib.author }}</div>{% endif %}
+                            <h3 class="title">{{ bib.title }}</h3>
+                            <div class="publication-info">
+                                {{ bib.booktitle }}
+                                {% if bib.volume %}, Vol. {{ bib.volume }}{% endif %}
+                                {% if bib.number %}, No. {{ bib.number }}{% endif %}
+                                {% if bib.pages %}, pp. {{ bib.pages }}{% endif %}
+                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }}{% else %}, to appear {% endif %}.
+                                {% if bib.venue %} {{ bib.venue }} .{% endif %}
+                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                            </div><!--//publication-body-->
+                        </div><!--//item-inner-->
+                    </div><!--//item-->
+                {% endfor %}
+            </div><!--//row-->
+        </section><!--//section-->
+    </div><!--//wrapper-->
+{% endblock %}

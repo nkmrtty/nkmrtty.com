@@ -1,0 +1,5 @@
+project-name: nkmrtty.com
+base-path: /
+context:
+  static:
+    site-title: nkmrtty.com

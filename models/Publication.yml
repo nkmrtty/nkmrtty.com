@@ -1,0 +1,11 @@
+bibtype: String
+author: String
+title: String
+booktitle: String
+volume: String
+number: String
+pages: String
+published: Boolean
+published-date: DateTime
+venue: String
+note: String

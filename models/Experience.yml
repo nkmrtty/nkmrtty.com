@@ -1,0 +1,5 @@
+place: String
+title: String
+fromdate: DateTime
+todate: DateTime
+desc: String
