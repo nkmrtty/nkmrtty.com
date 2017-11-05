@@ -1,0 +1,5 @@
+recipient: String
+title: String
+organization: String
+received-date: DateTime
+url: String

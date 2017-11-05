@@ -1,0 +1,10 @@
+author: String
+title: String
+journal: String
+volume: String
+number: String
+pages: String
+published-date: DateTime
+is-published: Boolean
+pdf: String
+bibtex: String

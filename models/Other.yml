@@ -1,0 +1,6 @@
+header: String
+body: String
+footer: String
+published-date: DateTime
+venue: String
+url: String

@@ -1,0 +1,9 @@
+author: String
+title: String
+conference: String
+published-date: DateTime
+is-published: Boolean
+venue: String
+acceptance-rate: String
+pdf: String
+bibtex: String

@@ -24,7 +24,7 @@
         <div class="contact-info">
             <div class="container text-center">
                 <ul class="list-inline">
-                    <li class="email"><i class="fa fa-envelope"></i><a href="mailto:nakamura.tatsuya@ist.osaka-u.ac.jp">nakamura.tatsuya@ist.osaka-u.ac.jp</a></li>
+                    <li class="email"><i class="fa fa-envelope"></i><a href="mailto:nakamura.tatsuya [at] ist.osaka-u.ac.jp">nakamura.tatsuya [at] ist.osaka-u.ac.jp</a></li>
                     <li class="website"><i class="fa fa-globe"></i><a href="//nkmrtty.com" target="_blank">nkmrtty.com</a></li>
                 </ul>
             </div><!--//container-->
@@ -37,6 +37,7 @@
                         <li><a class="scrollto" href="#education-section">Education</a></li>
                         <li><a class="scrollto" href="#experiences-section">Experiences</a></li>
                         <li><a class="scrollto" href="#publication-section">Publication</a></li>
+                        <li><a href="http://nkmrtty.hatenablog.com/"  target="_blank">Blog</a></li>
                     </ul><!--//page-nav-->
                 </div>
             </div><!--//page-nav-wrapper-->
@@ -92,18 +93,20 @@
 
             <h3 class="subtitle text-center">Journal</h3>
             <div class="row">
-                {% for bib in journals %}
+                {% for bib in journal %}
                     <div class="item col-sm-12">
                         <div class="item-inner">
                             <div class="author">{{ bib.author }}</div>
                             <h3 class="title">{{ bib.title }}</h3>
                             <div class="publication-info">
-                                {{ bib.booktitle }}
-                                {% if bib.volume %}, Vol. {{ bib.volume }} {% endif %}
-                                {% if bib.number %}, No. {{ bib.number }} {% endif %}
-                                {% if bib.pages %}, pp. {{ bib.pages }} {% endif %}
-                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }} {% else %}, to appear {% endif %}.
-                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                                {{ bib.journal }}, 
+                                {% if bib.is_published %}
+                                Vol. {{ bib.volume }}, 
+                                No. {{ bib.number }}, 
+                                pp. {{ bib.pages }},
+                                {{ bib.published_date.strftime('%B %Y') }}.
+                                {% if bib.pdf %}<a href="{{ bib.pdf }}">[Paper]</a>{% endif %}
+                                {% else %} to appear.{% endif %}
                             </div><!--//publication-body-->
                         </div><!--//item-inner-->
                     </div><!--//item-->
@@ -118,13 +121,13 @@
                             <div class="author">{{ bib.author }}</div>
                             <h3 class="title">{{ bib.title }}</h3>
                             <div class="publication-info">
-                                {{ bib.booktitle }}
-                                {% if bib.volume %}, Vol. {{ bib.volume }}{% endif %}
-                                {% if bib.number %}, No. {{ bib.number }}{% endif %}
-                                {% if bib.pages %}, pp. {{ bib.pages }}{% endif %}
-                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }} {% else %}, to appear {% endif %}.
-                                {% if bib.venue %} {{ bib.venue }} .{% endif %}
-                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                                {{ bib.conference }}, 
+                                {% if bib.is_published %}
+                                {{ bib.published_date.strftime('%B %Y') }}.
+                                {{ bib.venue }}.
+                                Acceptance rate: {{ bib.acceptance_rate }}%.
+                                {% if bib.pdf %}<a href="{{ bib.pdf }}">[Paper]</a>{% endif %}
+                                {% else %} to appear.{% endif %}
                             </div><!--//publication-body-->
                         </div><!--//item-inner-->
                     </div><!--//item-->
@@ -133,19 +136,18 @@
 
             <h3 class="subtitle text-center">Domestic Conference</h3>
             <div class="row">
-                {% for bib in domconf %}
+                {% for bib in dmsconf %}
                     <div class="item col-sm-12">
                         <div class="item-inner">
                             <div class="author">{{ bib.author }}</div>
                             <h3 class="title">{{ bib.title }}</h3>
                             <div class="publication-info">
-                                {{ bib.booktitle }}
-                                {% if bib.volume %}, Vol. {{ bib.volume }}{% endif %}
-                                {% if bib.number %}, No. {{ bib.number }}{% endif %}
-                                {% if bib.pages %}, pp. {{ bib.pages }}{% endif %}
-                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }} {% else %}, to appear {% endif %}.
-                                {% if bib.venue %} {{ bib.venue }} .{% endif %}
-                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                                {{ bib.conference }}, 
+                                {% if bib.is_published %}
+                                {{ bib.published_date.strftime('%B %Y') }}.
+                                {{ bib.venue }}.
+                                {% if bib.pdf %}<a href="{{ bib.pdf }}">[Paper]</a>{% endif %}
+                                {% else %} to appear.{% endif %}
                             </div><!--//publication-body-->
                         </div><!--//item-inner-->
                     </div><!--//item-->
@@ -154,13 +156,16 @@
 
             <h3 class="subtitle text-center">Research Fund</h3>
             <div class="row">
-                {% for bib in funds %}
+                {% for bib in fund %}
                     <div class="item col-sm-12">
                         <div class="item-inner">
-                            <div class="author">{{ bib.author }}</div>
-                            <h3 class="title">{{ bib.title }}</h3>
+                            <div class="author">{{ bib.position }}</div>
+                            <h3 class="title">{{ bib.theme }}</h3>
                             <div class="publication-info">
-                                {{ bib.booktitle }} .
+                                {{ bib.grant }},
+                                {{ bib.budget }},
+                                {{ bib.period_from.strftime('%B %Y') }} - {{ bib.period_to.strftime('%B %Y') }}.
+                                {% if bib.url %}<a href="{{ bib.url }}">[Web]</a>{% endif %}  
                             </div><!--//publication-body-->
                         </div><!--//item-inner-->
                     </div><!--//item-->
@@ -169,19 +174,15 @@
 
             <h3 class="subtitle text-center">Award</h3>
             <div class="row">
-                {% for bib in awards %}
+                {% for bib in award %}
                     <div class="item col-sm-12">
                         <div class="item-inner">
-                            <div class="author">{{ bib.author }}</div>
+                            <div class="author">{{ bib.recipient }}</div>
                             <h3 class="title">{{ bib.title }}</h3>
                             <div class="publication-info">
-                                {{ bib.booktitle }}
-                                {% if bib.volume %}, Vol. {{ bib.volume }}{% endif %}
-                                {% if bib.number %}, No. {{ bib.number }}{% endif %}
-                                {% if bib.pages %}, pp. {{ bib.pages }}{% endif %}
-                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }} {% else %}, to appear {% endif %}.
-                                {% if bib.venue %} {{ bib.venue }} .{% endif %}
-                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                                {{ bib.organization }},
+                                {{ bib.received_date.strftime('%B %Y') }}.
+                                {% if bib.url %}<a href="{{ bib.url }}">[Web]</a>{% endif %}
                             </div><!--//publication-body-->
                         </div><!--//item-inner-->
                     </div><!--//item-->
@@ -190,19 +191,16 @@
 
             <h3 class="subtitle text-center">Others</h3>
             <div class="row">
-                {% for bib in others %}
+                {% for bib in other %}
                     <div class="item col-sm-12">
                         <div class="item-inner">
-                            {% if bib.author %}<div class="author">{{ bib.author }}</div>{% endif %}
-                            <h3 class="title">{{ bib.title }}</h3>
+                            <div class="author">{{ bib.header }}</div>
+                            <h3 class="title">{{ bib.body }}</h3>
                             <div class="publication-info">
-                                {{ bib.booktitle }}
-                                {% if bib.volume %}, Vol. {{ bib.volume }}{% endif %}
-                                {% if bib.number %}, No. {{ bib.number }}{% endif %}
-                                {% if bib.pages %}, pp. {{ bib.pages }}{% endif %}
-                                {% if bib.published %}, {{ bib.published_date.strftime('%B %Y') }}{% else %}, to appear {% endif %}.
-                                {% if bib.venue %} {{ bib.venue }} .{% endif %}
-                                {% if bib.note %} {{ bib.note }} .{% endif %}
+                                {{ bib.footer }},
+                                {{ bib.published_date.strftime('%B %Y') }}.
+                                {{ bib.venue }}.
+                                {% if bib.url %}<a href="{{ bib.url }}">[Web]</a>{% endif %}  
                             </div><!--//publication-body-->
                         </div><!--//item-inner-->
                     </div><!--//item-->

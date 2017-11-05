@@ -1,0 +1,7 @@
+position: String
+theme: String
+grant: String
+budget: String
+period-from: DateTime
+period-to: DateTime
+url: String
