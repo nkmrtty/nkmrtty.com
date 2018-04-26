@@ -1,7 +1,8 @@
-author: Shun Abe, Masumi Shirakawa, Tatsuya Nakamura, Takahiro Hara, Kazushi Ikeda and Keiichiro Hoashi
+author: Shun Abe, Masumi Shirakawa, <b>Tatsuya Nakamura</b>, Takahiro Hara, Kazushi Ikeda and Keiichiro Hoashi
 title: Predicting the Occurrence of Life Events from User's Tweet History
 conference: IEEE International Conference on Semantic Computing (ICSC)
 published-date: 2018-01-31
-is-published: false
+is-published: true
 venue: California, USA
 acceptance-rate: 22.6
+pdf: https://doi.org/10.1109/ICSC.2018.00038

@@ -10,3 +10,5 @@ context:
     fund: session.query(Fund).order_by(Fund.period_from.desc()).all()
     award: session.query(Award).order_by(Award.received_date.desc()).all()
     other: session.query(Other).order_by(Other.published_date.desc()).all()
+    membership: session.query(Membership).order_by(Membership.start_year.desc()).all()
+    activity: session.query(Activity).order_by(Activity.year.desc()).all()

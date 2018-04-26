@@ -39,3 +39,28 @@
 .publication-section .desc {
   color: #666;
 }
+
+
+.activity-section .subtitle {
+    font-size: 18px;
+    color: #555555;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.activity-section .item-inner {
+    padding: 0 30px;
+}
+
+.activity-section .timeline .place {
+    margin-bottom: 5px;
+}
+.activity-section .timeline .item {
+    margin-bottom: 15px;
+}
+
+.activity-section .activity {
+    font-size: 16px;
+    margin-bottom: 5px;
+}

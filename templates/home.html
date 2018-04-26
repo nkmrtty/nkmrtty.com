@@ -24,8 +24,8 @@
         <div class="contact-info">
             <div class="container text-center">
                 <ul class="list-inline">
-                    <li class="email"><i class="fa fa-envelope"></i><a href="mailto:nakamura.tatsuya [at] ist.osaka-u.ac.jp">nakamura.tatsuya [at] ist.osaka-u.ac.jp</a></li>
-                    <li class="website"><i class="fa fa-globe"></i><a href="//nkmrtty.com" target="_blank">nkmrtty.com</a></li>
+                    <li class="email"><i class="fa fa-envelope"></i>nkmrtty [dot] com [at] gmail [dot] com</li>
+                    <li class="website"><i class="fa fa-globe"></i>nkmrtty.com</li>
                 </ul>
             </div><!--//container-->
         </div><!--//contact-info-->
@@ -37,6 +37,7 @@
                         <li><a class="scrollto" href="#education-section">Education</a></li>
                         <li><a class="scrollto" href="#experiences-section">Experiences</a></li>
                         <li><a class="scrollto" href="#publication-section">Publication</a></li>
+                        <li><a class="scrollto" href="#activity-section">Activity</a></li>
                         <li><a href="http://nkmrtty.hatenablog.com/"  target="_blank">Blog</a></li>
                     </ul><!--//page-nav-->
                 </div>
@@ -45,10 +46,10 @@
     </header><!--//header-->
 
     <div class="wrapper container">        
-         <section id="education-section" class="education-section section">
-             <h2 class="section-title">Education</h2>
-             <div class="row">
-             {% for education in educations %}
+        <section id="education-section" class="education-section section">
+            <h2 class="section-title">Education</h2>
+            <div class="row">
+            {% for education in educations %}
                 <div class="item col-sm-12">
                     <div class="item-inner">
                         <h3 class="degree">{{ education.degree }}</h3>
@@ -64,8 +65,8 @@
                         </div>
                     </div><!--//item-inner-->
                 </div><!--//item-->
-             {% endfor %}
-             </div><!--//row-->
+            {% endfor %}
+            </div><!--//row-->
         </section><!--//section-->
 
         <section id="experiences-section" class="experiences-section section">
@@ -205,6 +206,41 @@
                         </div><!--//item-inner-->
                     </div><!--//item-->
                 {% endfor %}
+            </div><!--//row-->
+        </section><!--//section-->
+
+        <section id="activity-section" class="activity-section section">
+            <h2 class="section-title">Activity</h2>
+
+            <h3 class="subtitle text-center">Academic Community</h3>
+            <div class="timeline">
+                {% for mem in membership %}
+                    <div class="item">
+                        <div class="work-place">
+                            <h3 class="place">{{ mem.organization }}</h3>
+                        </div>
+                        <div class="job-meta">
+                            <div class="title">{{ mem.type }}</div>
+                            <div class="time">{{ mem.start_year }} - {% if mem.end_year %} {{ mem.end_year }} {% else %} Present {% endif %}</div>
+                        </div><!--//job-meta-->
+                        <div class="job-desc">
+                            <p>{{ mem.organization_desc }}</p> 
+                        </div><!--//job-desc-->
+                    </div><!--//item-->
+                {% endfor %}
+            </div><!--//timeline-->
+
+            <h3 class="subtitle text-center">Professional Activity</h3>
+            <div class="row">
+                <div class="item col-sm-12">
+                    <div class="item-inner">
+                        <ul class="list-unstyled service-list">
+                            {% for act in activity %}
+                            <li class="activity"><i class="fas {{act.type}}" aria-hidden="true"></i> {{act.desc}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div><!--//item-inner-->
+                </div><!--//item-->
             </div><!--//row-->
         </section><!--//section-->
     </div><!--//wrapper-->

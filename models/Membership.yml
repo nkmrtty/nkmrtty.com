@@ -1,0 +1,5 @@
+organization: String
+organization-desc: String
+type: String
+start_year: Integer
+end_year: Integer
